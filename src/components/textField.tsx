@@ -1,11 +1,11 @@
 import React from 'react'
 import { TextField, TextFieldProps } from '@material-ui/core'
-import { InputAdornment, SvgIconTypeMap } from '@material-ui/core'
+import { InputAdornment, InputProps } from '@material-ui/core'
 
 interface iTextField {
   type?: string
   margin?: any
-  icon?: SvgIconTypeMap
+  inputProps?: InputProps
 }
 
 export default function TextFieldComponent(props: TextFieldProps, extraProps: iTextField) {
@@ -17,12 +17,12 @@ export default function TextFieldComponent(props: TextFieldProps, extraProps: iT
       inputProps={{
         startAdornment: (
           <InputAdornment position="start">
-            {extraProps.icon}
+            {extraProps.inputProps}
           </InputAdornment>
         )
       }}
+
       {...props}
-    >
-    </TextField>
+    />
   )
 }

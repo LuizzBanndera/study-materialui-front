@@ -12,11 +12,11 @@ const flex = css`
   justify-content: center;
   align-items: center;
 `
-const Container = styled.div`
+const ContainerStyled = styled.div`
   ${flex};
   height: 100vh;  
 `
-const Banner = styled.div`
+const BannerStyled = styled.div`
   ${flex};
   height: 100vh;
   float: left;
@@ -28,7 +28,7 @@ const Banner = styled.div`
     width: 0%;
   }
 `
-const Form = styled.div`
+const FormStyled = styled.div`
   ${flex};
   animation: ${fadeIn};
   animation-duration: 2s;
@@ -38,14 +38,14 @@ const Form = styled.div`
 `
 export default function Wellcome() {
 
-  const [register, setRegister] = useState(true)
+  const [register, setRegister] = useState(false)
 
   return (
-    <Container>
-      <Banner>
+    <ContainerStyled>
+      <BannerStyled>
         Banner
-      </Banner>
-      <Form>
+      </BannerStyled>
+      <FormStyled>
         {
           register
             ?
@@ -53,7 +53,7 @@ export default function Wellcome() {
             :
             <Login />
         }
-      </Form>
-    </Container>
+      </FormStyled>
+    </ContainerStyled>
   )
 }

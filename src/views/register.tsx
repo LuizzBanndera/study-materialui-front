@@ -8,27 +8,28 @@ const flex = css`
   justify-content: center;
   flex-direction: column;
 `
-const ContainerSC = styled.div`
+const ContainerStyled = styled.div`
   ${flex};
 `
-const FormSC = styled.form`
+const FormStyled = styled.form`
   ${flex};
   height: 22rem;
   justify-content: space-between;
+  min-width: 268px;
 `
-const TitleSC = styled.h3`
+const TitleStyled = styled.h3`
 letter-spacing: 5px;
 color: #373D3f;
 font-size: 22px;
 margin-top: 0;
 `
 
-export default function Register() {
+export default function RegisterComponent() {
 
   return (
-    <ContainerSC>
-      <FormSC>
-        <TitleSC>Register yourself.</TitleSC>
+    <ContainerStyled>
+      <FormStyled>
+        <TitleStyled>Register yourself.</TitleStyled>
 
         <TextField
           fullWidth
@@ -58,7 +59,7 @@ export default function Register() {
         />
 
         <Button label="Register" />
-      </FormSC>
-    </ContainerSC>
+      </FormStyled>
+    </ContainerStyled>
   )
 }

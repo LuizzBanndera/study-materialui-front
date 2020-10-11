@@ -1,49 +1,46 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { Email, Lock } from '@material-ui/icons'
-import { Button } from '../components'
-import {
-  TextField,
-  InputAdornment
-} from '@material-ui/core'
+import { InputAdornment } from '@material-ui/core'
+import { Button, TextField } from '../components'
 
 const flex = css`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 `
-const ContainerSC = styled.div`
+const ContainerStyled = styled.div`
   ${flex};
   height: 100vh;  
   width: 30%;
 `
-const InputSC = styled(TextField)`
-  width: 16rem;
-`
-const FormSC = styled.form`
+const FormStyled = styled.form`
   ${flex};
   height: 22rem;
   flex-direction: column;  
-  justify-content: space-evenly;
+  justify-content: space-between;
+  min-width: 268px;  
 `
-const TitleSC = styled.h3`
+const TitleStyled = styled.h3`
 letter-spacing: 5px;
 color: #373D3f;
 font-size: 22px;
 margin-top: 0;
 `
-const SingUpSC = styled.a`
+const SingUpStyled = styled.a`
   text-decoration: none;
   font-size: 12px;
 `
 
 export default function Login() {
   return (
-    <ContainerSC>
-      <FormSC>
-        <TitleSC>D-A-S-H</TitleSC>
-        <InputSC
-          autoFocus
+    <ContainerStyled>
+      <FormStyled>
+        <TitleStyled>D-A-S-H</TitleStyled>
+
+        <TextField
+          fullWidth
           type="email"
           label="E-mail"
           variant="outlined"
@@ -55,10 +52,10 @@ export default function Login() {
             ),
           }}
         />
-
-        <InputSC
-          label="Password"
+        <TextField
+          fullWidth
           type="password"
+          label="Password"
           variant="outlined"
           InputProps={{
             startAdornment: (
@@ -70,11 +67,12 @@ export default function Login() {
         />
 
         <Button label="Login" />
-        <SingUpSC href="http://localhost:3000/">
-          <span>Don`t have an account? Sing up!</span>
-        </SingUpSC>
 
-      </FormSC>
-    </ContainerSC>
+        <SingUpStyled href="http://localhost:3000/">
+          <span>Don`t have an account? Sing up!</span>
+        </SingUpStyled>
+
+      </FormStyled>
+    </ContainerStyled>
   )
 }
