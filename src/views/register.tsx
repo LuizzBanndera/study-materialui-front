@@ -7,6 +7,7 @@ const flex = css`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  text-align: center;
 `
 const ContainerStyled = styled.div`
   ${flex};
@@ -18,6 +19,7 @@ const FormStyled = styled.form`
   min-width: 268px;
 `
 const TitleStyled = styled.h3`
+${flex}
 letter-spacing: 5px;
 color: #373D3f;
 font-size: 22px;

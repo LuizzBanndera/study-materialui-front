@@ -38,7 +38,7 @@ const FormStyled = styled.div`
 `
 export default function Wellcome() {
 
-  const [register, setRegister] = useState(false)
+  const [register, setRegister] = useState(true)
 
   return (
     <ContainerStyled>

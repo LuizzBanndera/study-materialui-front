@@ -20,13 +20,14 @@ const FormStyled = styled.form`
   height: 22rem;
   flex-direction: column;  
   justify-content: space-between;
-  min-width: 268px;  
+  min-width: 268px;    
 `
 const TitleStyled = styled.h3`
-letter-spacing: 5px;
-color: #373D3f;
-font-size: 22px;
-margin-top: 0;
+  text-align: center;
+  letter-spacing: 5px;
+  color: #373D3f;
+  font-size: 22px;
+  margin-top: 0;
 `
 const SingUpStyled = styled.a`
   text-decoration: none;
