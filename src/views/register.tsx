@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { TextField, Button } from '@material-ui/core'
+import { Button, TextField } from '../components'
 
 const flex = css`
   display: flex;
@@ -8,20 +8,15 @@ const flex = css`
   justify-content: center;
   flex-direction: column;
 `
-const Container = styled.div`
+const ContainerSC = styled.div`
   ${flex};
 `
-const Form = styled.form`
+const FormSC = styled.form`
   ${flex};
   height: 22rem;
-  justify-content: space-evenly;
+  justify-content: space-between;
 `
-const Input = styled(TextField)`
-  width: 16rem;
- .MuiOutlinedInput-root {
-  }
-`
-const Title = styled.h3`
+const TitleSC = styled.h3`
 letter-spacing: 5px;
 color: #373D3f;
 font-size: 22px;
@@ -31,34 +26,39 @@ margin-top: 0;
 export default function Register() {
 
   return (
-    <Container>
-      <Form>
-        <Title>Register yourself.</Title>
-        <Input
-          autoFocus
+    <ContainerSC>
+      <FormSC>
+        <TitleSC>Register yourself.</TitleSC>
+
+        <TextField
+          fullWidth
+          margin="dense"
+          variant="outlined"
           label="First name"
-          variant="outlined"
-          margin="dense"
         />
-        <Input
+        <TextField
+          fullWidth
+          margin="dense"
+          variant="outlined"
           label="Last name"
-          variant="outlined"
-          margin="dense"
         />
-        <Input
-          label="E-mail"
-          variant="outlined"
+        <TextField
+          fullWidth
           type="email"
           margin="dense"
-        />
-        <Input
-          label="Password"
           variant="outlined"
-          margin="dense"
-          type="password"
+          label="E-mail"
         />
-        <Button>Register</Button>
-      </Form>
-    </Container>
+        <TextField
+          fullWidth
+          type="password"
+          margin="dense"
+          variant="outlined"
+          label="Password"
+        />
+
+        <Button label="Register" />
+      </FormSC>
+    </ContainerSC>
   )
 }

@@ -1,16 +1,23 @@
 import React from 'react'
-import styled from 'styled-components'
-
-const button = styled.button`
-width: 3rem;
-`
+import { styled } from '@material-ui/core/styles'
+import { Button } from '@material-ui/core'
 
 interface iButton {
   label: string
 }
 
-export default function Button(props: iButton) {
+const ButtonSC = styled(Button)({
+  textTransform: "capitalize",
+  backgroundColor: "#41179c",
+  color: "whitesmoke",
+  '&:hover': {
+    backgroundColor: "#463c52ba",
+  }
+})
+
+export default function ButtonComponent(props: iButton) {
+
   return (
-    <button>{props.label}</button>
+    <ButtonSC variant="contained">{props.label}</ButtonSC>
   )
 }

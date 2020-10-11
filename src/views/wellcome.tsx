@@ -21,11 +21,11 @@ const Banner = styled.div`
   height: 100vh;
   float: left;
   width: 68%;
-  background-color: #191421;
+  background-color: #41179c;
   color: whitesmoke;
   @media (max-width: 900px) {
-    width: 0%;
     visibility: hidden;
+    width: 0%;
   }
 `
 const Form = styled.div`
