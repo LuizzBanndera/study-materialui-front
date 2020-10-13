@@ -44,7 +44,7 @@ const FormStyled = styled.div`
 
 export default function Component() {
 
-  const [register, setRegister] = useState(false)
+  const [register, setRegister] = useState(true)
 
   const WellcomeContext = React.createContext({
     register,

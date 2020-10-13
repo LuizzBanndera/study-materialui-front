@@ -57,13 +57,11 @@ export default function Component({ register, setRegister }: iProps) {
 
         <TextField
           fullWidth
-          margin="dense"
           variant="standard"
           label="First name"
         />
         <TextField
           fullWidth
-          margin="dense"
           variant="standard"
           label="Last name"
         />
@@ -71,7 +69,6 @@ export default function Component({ register, setRegister }: iProps) {
           fullWidth
           required
           type="email"
-          margin="dense"
           variant="standard"
           label="E-mail"
         />
@@ -79,7 +76,6 @@ export default function Component({ register, setRegister }: iProps) {
           fullWidth
           required
           type="password"
-          margin="dense"
           variant="standard"
           label="Password"
         />
