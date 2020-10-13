@@ -23,7 +23,7 @@ const FormStyled = styled.form`
   background-color: whitesmoke;
   border-radius: 12px;
   padding: 10px;
-  @media (max-width: 900px) {
+  @media (max-width: 400px) {
     width: 100%;
   }    
 `
@@ -80,7 +80,7 @@ export default function Component({ register, setRegister }: iProps) {
           label="Password"
         />
 
-        <Button label="Register" />
+        <Button type="submit" label="Register" />
 
         <SpanStyled onClick={() => setRegister(false)} >
           Back to login.

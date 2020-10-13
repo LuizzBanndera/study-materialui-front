@@ -2,11 +2,7 @@ import React from 'react'
 import { styled } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core'
 
-interface iButton {
-  label: string
-}
-
-const ButtonSC = styled(Button)({
+const ButtonStyled = styled(Button)({
   textTransform: "capitalize",
   backgroundColor: "#41179c",
   color: "whitesmoke",
@@ -15,9 +11,21 @@ const ButtonSC = styled(Button)({
   }
 })
 
-export default function ButtonComponent(props: iButton) {
+interface iButton {
+  label: string
+  onClick?: any
+  type?: "submit" | "button" | "reset"
+}
+
+export default function Component(props: iButton) {
 
   return (
-    <ButtonSC variant="contained">{props.label}</ButtonSC>
+    <ButtonStyled
+      type={props.type}
+      variant="contained"
+      onClick={props.onClick}
+    >
+      {props.label}
+    </ButtonStyled>
   )
 }

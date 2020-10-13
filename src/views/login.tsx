@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 import { Email, Lock } from '@material-ui/icons'
-import { InputAdornment } from '@material-ui/core'
-import { Button, TextField } from '../components'
+import { InputAdornment, Snackbar } from '@material-ui/core'
+import { Button, TextField, SnackMsg } from '../components'
+import { Alert } from '@material-ui/lab'
+import db from '../database/connection'
 
 //styled
 const flex = css`
@@ -25,7 +27,7 @@ const FormStyled = styled.form`
   justify-content: space-between;
   min-width: 268px;   
   padding: 10px;   
-  @media (max-width: 900px) {
+  @media (max-width: 400px) {
     width: 100%;
   }
 `
@@ -44,20 +46,60 @@ const SpanStyled = styled.span`
   font-size: 12px;
 `
 
-
 interface iProps {
   register: boolean
   setRegister: Function
 }
 
-export default function Component({ register, setRegister }: iProps) {
+export default function Component({ setRegister }: iProps) {
+
+  //properties
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [snackMsg, settsnackMsg] = useState(true)
+
+  //methods
+  const auth = async () => {
+    try {
+      if (email && password) {
+        const result = await db.post('users/login', { email, password })
+        console.log(result.status);
+
+        result.status === 200
+          ?
+          settsnackMsg(true)
+          :
+          settsnackMsg(false)
+      }
+
+    } catch (error) {
+      settsnackMsg(true)
+    }
+  }
+
+  const handleMsg = () => settsnackMsg(!snackMsg)
 
   return (
     <ContainerStyled>
-      <FormStyled>
+      <FormStyled >
+
         <TitleStyled>D-A-S-H</TitleStyled>
 
+        <SnackMsg
+          duration={4000}
+          message="Logged in!!!"
+        />
+        {/* <Snackbar open={snackMsg} autoHideDuration={4000} onClose={() => handleMsg()}>
+          <Alert
+            variant="filled"
+            severity="success">
+            Logged in!
+          </Alert>
+        </Snackbar> */}
+
         <TextField
+          onChange={(e) => setEmail(e.target.value)}
+          autoFocus
           required
           fullWidth
           type="email"
@@ -71,7 +113,9 @@ export default function Component({ register, setRegister }: iProps) {
             ),
           }}
         />
+
         <TextField
+          onChange={(e) => setPassword(e.target.value)}
           required
           fullWidth
           type="password"
@@ -86,7 +130,11 @@ export default function Component({ register, setRegister }: iProps) {
           }}
         />
 
-        <Button label="Login" />
+        <Button
+          type="submit"
+          label="Login"
+          onClick={() => auth()}
+        />
 
         <SpanStyled onClick={() => setRegister(true)} >
           Don`t have an account? Sing up!
