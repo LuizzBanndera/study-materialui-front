@@ -14,23 +14,32 @@ const flex = css`
 const ContainerStyled = styled.div`
   ${flex};
   height: 100vh;  
-  width: 30%;
+  width: 85%;
 `
 const FormStyled = styled.form`
   ${flex};
   height: 22rem;
   flex-direction: column;  
+  background-color: whitesmoke;
+  border-radius: 12px;  
   justify-content: space-between;
-  min-width: 268px;    
+  min-width: 268px;   
+  padding: 10px;   
+  @media (max-width: 900px) {
+    width: 100%;
+  }
 `
 const TitleStyled = styled.h3`
   text-align: center;
+  user-select: none;
   letter-spacing: 5px;
   color: #373D3f;
   font-size: 22px;
   margin-top: 0;
 `
-const SingUpStyled = styled.a`
+const SpanStyled = styled.span`
+  cursor: pointer;
+  user-select: none;
   text-decoration: none;
   font-size: 12px;
 `
@@ -49,6 +58,7 @@ export default function Component({ register, setRegister }: iProps) {
         <TitleStyled>D-A-S-H</TitleStyled>
 
         <TextField
+          required
           fullWidth
           type="email"
           label="E-mail"
@@ -62,6 +72,7 @@ export default function Component({ register, setRegister }: iProps) {
           }}
         />
         <TextField
+          required
           fullWidth
           type="password"
           label="Password"
@@ -77,9 +88,9 @@ export default function Component({ register, setRegister }: iProps) {
 
         <Button label="Login" />
 
-        <SingUpStyled href="#" onClick={() => setRegister(!register)}>
-          <span>Don`t have an account? Sing up!</span>
-        </SingUpStyled>
+        <SpanStyled onClick={() => setRegister(true)} >
+          Don`t have an account? Sing up!
+        </SpanStyled>
 
       </FormStyled>
     </ContainerStyled>

@@ -13,16 +13,19 @@ const flex = css`
 const ContainerStyled = styled.div`
   ${flex};  
   height: 100vh;
-  width: 100%;
+  width: 85%;
 `
 const FormStyled = styled.form`
   ${flex};
-  height: 22rem;
+  height: 28rem;
   justify-content: space-between;
   min-width: 268px;
   background-color: whitesmoke;
   border-radius: 12px;
   padding: 10px;
+  @media (max-width: 900px) {
+    width: 100%;
+  }    
 `
 const TitleStyled = styled.h3`
 ${flex}
@@ -32,10 +35,12 @@ font-size: 22px;
 margin-top: 0;
 margin-bottom: 0;
 `
-const SingUpStyled = styled.a`
-  margin-top: 21px;
+const SpanStyled = styled.span`
+  cursor: pointer;
+  user-select: none;
   text-decoration: none;
   font-size: 12px;
+  margin-top: 15px;
 `
 
 interface iProps {
@@ -80,9 +85,11 @@ export default function Component({ register, setRegister }: iProps) {
         />
 
         <Button label="Register" />
-        <SingUpStyled href="#" onClick={() => setRegister(!register)}>
-          <span>Back to login.</span>
-        </SingUpStyled>
+
+        <SpanStyled onClick={() => setRegister(false)} >
+          Back to login.
+        </SpanStyled>
+
       </FormStyled>
     </ContainerStyled>
   )

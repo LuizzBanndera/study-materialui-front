@@ -60,7 +60,9 @@ export default function Component() {
           ({ register, setRegister }) => (
 
             < ContainerStyled >
-              <BannerStyled>Banner</BannerStyled>
+              <BannerStyled>
+                Your banner here.
+              </BannerStyled>
               <FormStyled>
                 {
                   register
