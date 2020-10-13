@@ -3,6 +3,7 @@ import styled, { keyframes, css } from 'styled-components'
 import Register from './register'
 import Login from './login'
 
+//styled
 const fadeIn = keyframes`
   0%    { opacity: 0 }
   100 % { opacity: 1 }  
@@ -31,29 +32,48 @@ const BannerStyled = styled.div`
 const FormStyled = styled.div`
   ${flex};
   animation: ${fadeIn};
-  animation-duration: 2s;
+  animation-duration: 0.8s;
   float: right;
   height: 100vh;
   width: 32%;
+  @media (max-width: 900px) {
+    width: 100%;
+  }    
 `
-export default function Wellcome() {
 
-  const [register, setRegister] = useState(true)
+
+export default function Component() {
+
+  const [register, setRegister] = useState(false)
+
+  const WellcomeContext = React.createContext({
+    register,
+    setRegister
+  })
+
+  const ctx = { register, setRegister }
 
   return (
-    <ContainerStyled>
-      <BannerStyled>
-        Banner
-      </BannerStyled>
-      <FormStyled>
+    <WellcomeContext.Provider value={ctx}>
+      <WellcomeContext.Consumer>
         {
-          register
-            ?
-            <Register />
-            :
-            <Login />
+          ({ register, setRegister }) => (
+
+            < ContainerStyled >
+              <BannerStyled>Banner</BannerStyled>
+              <FormStyled>
+                {
+                  register
+                    ?
+                    <Register {...{ register, setRegister }} />
+                    :
+                    <Login {...{ register, setRegister }} />
+                }
+              </FormStyled>
+            </ContainerStyled>
+          )
         }
-      </FormStyled>
-    </ContainerStyled>
+      </WellcomeContext.Consumer>
+    </WellcomeContext.Provider >
   )
 }

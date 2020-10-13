@@ -4,6 +4,7 @@ import { Email, Lock } from '@material-ui/icons'
 import { InputAdornment } from '@material-ui/core'
 import { Button, TextField } from '../components'
 
+//styled
 const flex = css`
   display: flex;
   justify-content: center;
@@ -34,7 +35,14 @@ const SingUpStyled = styled.a`
   font-size: 12px;
 `
 
-export default function Login() {
+
+interface iProps {
+  register: boolean
+  setRegister: Function
+}
+
+export default function Component({ register, setRegister }: iProps) {
+
   return (
     <ContainerStyled>
       <FormStyled>
@@ -69,7 +77,7 @@ export default function Login() {
 
         <Button label="Login" />
 
-        <SingUpStyled href="http://localhost:3000/">
+        <SingUpStyled href="#" onClick={() => setRegister(!register)}>
           <span>Don`t have an account? Sing up!</span>
         </SingUpStyled>
 
