@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
-import { Button, TextField } from '../components'
+import { Button, TextField, SnackMsg } from '../components'
+import db from '../database/connection'
 
 //styled
 const flex = css`
@@ -49,21 +50,56 @@ interface iProps {
 }
 export default function Component({ register, setRegister }: iProps) {
 
+  interface iData {
+    first_name: string
+    last_name: string
+    email: string
+    password: string
+  }
+  const [succesMsg, setSuccesMsg] = useState(false)
+  const [data, setData] = useState<iData>({
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+  })
+
+  const createUser = async () => {
+    try {
+      if (data) {
+        const result = await db.put('users/create', data)
+        if (result.status === 200) {
+          setSuccesMsg(true)
+        }
+      }
+    } catch (error) {
+    }
+  }
+
   return (
     <ContainerStyled>
-      <FormStyled>
+      <FormStyled onSubmit={(e) => e.preventDefault()}>
 
         <TitleStyled>Register yourself.</TitleStyled>
+
+        <SnackMsg
+          duration={4000}
+          isOpen={succesMsg}
+          message="Registered sucessfully!"
+          onClose={() => setSuccesMsg(false)}
+        />
 
         <TextField
           fullWidth
           variant="standard"
           label="First name"
+          onChange={(e) => setData({ ...data, first_name: e.target.value })}
         />
         <TextField
           fullWidth
           variant="standard"
           label="Last name"
+          onChange={(e) => setData({ ...data, last_name: e.target.value })}
         />
         <TextField
           fullWidth
@@ -71,6 +107,7 @@ export default function Component({ register, setRegister }: iProps) {
           type="email"
           variant="standard"
           label="E-mail"
+          onChange={(e) => setData({ ...data, email: e.target.value })}
         />
         <TextField
           fullWidth
@@ -78,9 +115,14 @@ export default function Component({ register, setRegister }: iProps) {
           type="password"
           variant="standard"
           label="Password"
+          onChange={(e) => setData({ ...data, password: e.target.value })}
         />
 
-        <Button type="submit" label="Register" />
+        <Button
+          type="submit"
+          label="Register"
+          onClick={() => createUser()}
+        />
 
         <SpanStyled onClick={() => setRegister(false)} >
           Back to login.

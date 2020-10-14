@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react'
+import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 import { Email, Lock } from '@material-ui/icons'
 import { InputAdornment } from '@material-ui/core'
@@ -58,9 +58,8 @@ export default function Component({ setRegister }: iProps) {
   const [snackMsg, setsnackMsg] = useState(false)
 
   //methods
-  const auth = async (e: Event | FormEvent) => {
+  const auth = async () => {
     try {
-      e.preventDefault()
       if (email && password) {
         const result = await db.post('users/login', { email, password })
 
@@ -76,7 +75,7 @@ export default function Component({ setRegister }: iProps) {
 
   return (
     <ContainerStyled>
-      <FormStyled>
+      <FormStyled onSubmit={(e) => e.preventDefault()}>
 
         <TitleStyled>D-A-S-H</TitleStyled>
 
@@ -97,7 +96,6 @@ export default function Component({ setRegister }: iProps) {
           label="E-mail"
           variant="outlined"
           autoComplete="username"
-
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -127,7 +125,7 @@ export default function Component({ setRegister }: iProps) {
         <Button
           type="submit"
           label="Login"
-          onClick={(e: Event) => auth(e)}
+          onClick={() => auth()}
         />
 
         <SpanStyled onClick={() => setRegister(true)} >
