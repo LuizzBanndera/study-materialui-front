@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, FormEvent } from 'react'
 import styled, { css } from 'styled-components'
 import { Email, Lock } from '@material-ui/icons'
-import { InputAdornment, Snackbar } from '@material-ui/core'
+import { InputAdornment } from '@material-ui/core'
 import { Button, TextField, SnackMsg } from '../components'
-import { Alert } from '@material-ui/lab'
 import db from '../database/connection'
 
 //styled
@@ -56,46 +55,38 @@ export default function Component({ setRegister }: iProps) {
   //properties
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [snackMsg, settsnackMsg] = useState(true)
+  const [snackMsg, setsnackMsg] = useState(false)
 
   //methods
-  const auth = async () => {
+  const auth = async (e: Event | FormEvent) => {
     try {
+      e.preventDefault()
       if (email && password) {
         const result = await db.post('users/login', { email, password })
-        console.log(result.status);
 
-        result.status === 200
-          ?
-          settsnackMsg(true)
-          :
-          settsnackMsg(false)
+        if (result.status === 200) {
+          alert('logado')
+        }
       }
 
     } catch (error) {
-      settsnackMsg(true)
+      setsnackMsg(true)
     }
   }
 
-  const handleMsg = () => settsnackMsg(!snackMsg)
-
   return (
     <ContainerStyled>
-      <FormStyled >
+      <FormStyled>
 
         <TitleStyled>D-A-S-H</TitleStyled>
 
         <SnackMsg
-          duration={4000}
-          message="Logged in!!!"
+          duration={3000}
+          isOpen={snackMsg}
+          severity="error"
+          onClose={() => setsnackMsg(false)}
+          message="User or password incorrect"
         />
-        {/* <Snackbar open={snackMsg} autoHideDuration={4000} onClose={() => handleMsg()}>
-          <Alert
-            variant="filled"
-            severity="success">
-            Logged in!
-          </Alert>
-        </Snackbar> */}
 
         <TextField
           onChange={(e) => setEmail(e.target.value)}
@@ -105,6 +96,8 @@ export default function Component({ setRegister }: iProps) {
           type="email"
           label="E-mail"
           variant="outlined"
+          autoComplete="username"
+
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -121,6 +114,7 @@ export default function Component({ setRegister }: iProps) {
           type="password"
           label="Password"
           variant="outlined"
+          autoComplete="current-password"
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -133,7 +127,7 @@ export default function Component({ setRegister }: iProps) {
         <Button
           type="submit"
           label="Login"
-          onClick={() => auth()}
+          onClick={(e: Event) => auth(e)}
         />
 
         <SpanStyled onClick={() => setRegister(true)} >
