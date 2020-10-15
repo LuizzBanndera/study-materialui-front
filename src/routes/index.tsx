@@ -1,4 +1,5 @@
 import React from 'react'
+import { Login, Home } from '../views'
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,13 +7,11 @@ import {
   Redirect
 } from 'react-router-dom'
 
-import Login from '../views/wellcome'
-import Register from '../views/register'
-
 export default function Routes() {
   return (
     <Router>
       <Switch>
+
         <Redirect exact path="/" to="/login" />
 
         <Route
@@ -20,8 +19,8 @@ export default function Routes() {
           component={Login}
         />
         <Route
-          path="/register"
-          component={Register}
+          path="/home"
+          component={Home}
         />
 
       </Switch>
