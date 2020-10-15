@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 import { Button, TextField, SnackMsg } from '../components'
+import { Sleep } from '../helpers/helpers'
 import db from '../database/connection'
 
 //styled
@@ -66,13 +67,21 @@ export default function Component({ register, setRegister }: iProps) {
 
   const createUser = async () => {
     try {
-      if (data) {
+      const arrayData = Object.values(data)
+
+      if (arrayData.every(item => item !== "")) {
+
         const result = await db.put('users/create', data)
+
         if (result.status === 200) {
           setSuccesMsg(true)
+          await Sleep(3000)
+          setRegister(false)
         }
       }
+
     } catch (error) {
+
     }
   }
 
@@ -83,21 +92,24 @@ export default function Component({ register, setRegister }: iProps) {
         <TitleStyled>Register yourself.</TitleStyled>
 
         <SnackMsg
-          duration={4000}
+          duration={3000}
           isOpen={succesMsg}
           message="Registered sucessfully!"
           onClose={() => setSuccesMsg(false)}
         />
 
         <TextField
+          autoFocus
+          required
           fullWidth
-          variant="standard"
+          variant="outlined"
           label="First name"
           onChange={(e) => setData({ ...data, first_name: e.target.value })}
         />
         <TextField
+          required
           fullWidth
-          variant="standard"
+          variant="outlined"
           label="Last name"
           onChange={(e) => setData({ ...data, last_name: e.target.value })}
         />
@@ -105,7 +117,8 @@ export default function Component({ register, setRegister }: iProps) {
           fullWidth
           required
           type="email"
-          variant="standard"
+          variant="outlined"
+          autoComplete="username"
           label="E-mail"
           onChange={(e) => setData({ ...data, email: e.target.value })}
         />
@@ -113,7 +126,8 @@ export default function Component({ register, setRegister }: iProps) {
           fullWidth
           required
           type="password"
-          variant="standard"
+          variant="outlined"
+          autoComplete="password"
           label="Password"
           onChange={(e) => setData({ ...data, password: e.target.value })}
         />
